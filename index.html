@@ -1,274 +1,855 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Scribble Lab — Ayush's loud little notebook</title>
-<meta name="description" content="Scribble Lab: Ayush's notebook about coding, study hacks, gadgets and everyday life.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✏️</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<script>try{var t=JSON.parse(localStorage.getItem('sl-theme'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){}</script>
-<style>
-:root{--bg:#fff7e0;--paper:#fff;--ink:#14121f;--y:#ffd43b;--p:#ff6b9d;--b:#4dabf7;--g:#69db7c;--sh:#14121f;--sans:'Space Grotesk',system-ui,sans-serif;--mono:'Space Mono',monospace}
-[data-theme=dark]{--bg:#14121f;--paper:#211e33;--ink:#fff7e0;--sh:#ffd43b}
-*{box-sizing:border-box;margin:0}
-body{font-family:var(--sans);color:var(--ink);background:var(--bg);background-image:radial-gradient(var(--ink) 1px,transparent 1px);background-size:26px 26px;background-position:0 0;min-height:100vh;display:flex;flex-direction:column;line-height:1.55}
-body::before{content:"";position:fixed;inset:0;background:var(--bg);opacity:.9;z-index:-1}
-a{color:inherit;text-decoration:none}
-button{font:inherit;color:inherit;cursor:pointer}
-.wrap{width:min(980px,92%);margin:auto}
-.ticker{background:var(--ink);color:var(--bg);font:700 .8rem var(--mono);overflow:hidden;white-space:nowrap;padding:7px 0}
-.ticker div{display:inline-block;animation:slide 28s linear infinite}
-@keyframes slide{to{transform:translateX(-50%)}}
-header{border-bottom:3px solid var(--ink);background:var(--y);color:#14121f;position:sticky;top:0;z-index:20}
-.nav{display:flex;align-items:center;gap:12px;padding:12px 0;flex-wrap:wrap}
-.logo{font-weight:700;font-size:1.6rem;letter-spacing:-.04em;display:flex;align-items:center;gap:8px}
-.logo span{background:#14121f;color:var(--y);padding:0 8px;border-radius:8px;transform:rotate(-4deg);display:inline-block;transition:.2s}
-.logo:hover span{transform:rotate(4deg) scale(1.1)}
-.nav input[type=search]{margin-left:auto;flex:1;max-width:260px}
-input,textarea,select{width:100%;padding:11px 14px;border:3px solid var(--ink);border-radius:12px;background:var(--paper);color:var(--ink);font:inherit;outline:0;box-shadow:3px 3px 0 var(--sh)}
-header input{color:#14121f;background:#fff;border-color:#14121f;box-shadow:3px 3px 0 #14121f}
-input:focus,textarea:focus,select:focus{box-shadow:5px 5px 0 var(--p);transform:translate(-2px,-2px)}
-.btn{padding:10px 18px;border:3px solid var(--ink);border-radius:12px;background:var(--p);color:#14121f;font-weight:700;box-shadow:4px 4px 0 var(--sh);transition:.12s}
-header .btn{border-color:#14121f;box-shadow:4px 4px 0 #14121f}
-.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--sh)}
-.btn:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--sh)}
-.btn.w{background:var(--paper);color:var(--ink)}.btn.b{background:var(--b)}.btn.g{background:var(--g)}
-.btn.on{background:var(--g);color:#14121f}
-main{flex:1;padding:36px 0 60px}
-.hero{display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;margin-bottom:38px}
-.hero h1{font-size:clamp(2.6rem,8vw,5.4rem);line-height:.95;letter-spacing:-.05em}
-.hero h1 mark{background:var(--y);color:#14121f;padding:0 .12em;border:3px solid var(--ink);border-radius:12px;display:inline-block;transform:rotate(-2deg);box-shadow:5px 5px 0 var(--sh)}
-.hero p{margin-top:18px;font-size:1.1rem;max-width:40ch}
-.stick{background:var(--b);color:#14121f;border:3px solid var(--ink);border-radius:24px;padding:22px;box-shadow:8px 8px 0 var(--sh);transform:rotate(3deg);font-family:var(--mono)}
-.stick b{display:block;font:700 3rem var(--sans);line-height:1}
-.stick hr{border:0;border-top:3px dashed #14121f;margin:12px 0}
-.chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
-.chip{padding:7px 16px;border:3px solid var(--ink);border-radius:99px;background:var(--paper);font-weight:700;font-size:.88rem;box-shadow:3px 3px 0 var(--sh);transition:.12s}
-.chip:hover{transform:translate(-2px,-2px)}
-.chip.on{background:var(--p);color:#14121f}
-.list{display:grid;gap:20px}
-.row{display:grid;grid-template-columns:90px 1fr auto;gap:18px;align-items:center;padding:20px 24px;background:var(--paper);border:3px solid var(--ink);border-radius:20px;box-shadow:6px 6px 0 var(--sh);transition:.15s;animation:pop .5s both}
-.row:hover{transform:translate(-4px,-4px) rotate(-.5deg);box-shadow:10px 10px 0 var(--sh)}
-.num{font:700 3.4rem var(--sans);letter-spacing:-.06em;line-height:1;color:var(--c,var(--p));-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}
-.row h2{font-size:1.45rem;letter-spacing:-.03em;line-height:1.15;margin:6px 0}
-.row p{opacity:.78;font-size:.95rem}
-.tag{display:inline-block;font:700 .72rem var(--mono);text-transform:uppercase;padding:2px 10px;border:2px solid var(--ink);border-radius:99px;background:var(--c,var(--y));color:#14121f}
-.arrow{font:700 2rem var(--sans);width:54px;height:54px;border:3px solid var(--ink);border-radius:50%;display:grid;place-items:center;background:var(--y);color:#14121f;transition:.2s}
-.row:hover .arrow{transform:rotate(-45deg);background:var(--g)}
-@keyframes pop{from{opacity:0;transform:translateY(24px) scale(.97)}}
-.empty{padding:40px;text-align:center;border:3px dashed var(--ink);border-radius:20px;font:700 1.2rem var(--mono)}
-.art{background:var(--paper);border:3px solid var(--ink);border-radius:24px;box-shadow:9px 9px 0 var(--sh);padding:clamp(20px,5vw,48px);animation:pop .4s both}
-.art h1{font-size:clamp(2rem,5.5vw,3.5rem);line-height:1;letter-spacing:-.045em;margin:16px 0}
-.byline{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 0;border-block:3px dashed var(--ink);font-family:var(--mono);font-size:.85rem}
-.byline .sp{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
-.av{width:38px;height:38px;border-radius:50%;border:3px solid var(--ink);background:var(--g);color:#14121f;display:grid;place-items:center;font-weight:700}
-.prose{margin:28px 0;font-size:1.1rem}
-.prose p{margin-bottom:1.2em;line-height:1.8}
-.prose h2{font-size:1.7rem;letter-spacing:-.03em;margin:1.5em 0 .5em;display:inline-block;background:var(--y);color:#14121f;padding:0 10px;border:3px solid var(--ink);border-radius:10px;transform:rotate(-1deg)}
-.prose blockquote{background:var(--p);color:#14121f;border:3px solid var(--ink);border-radius:16px;padding:16px 20px;margin:1.5em 0;font-weight:700;font-size:1.25rem;box-shadow:5px 5px 0 var(--sh)}
-.prose ul{padding-left:1.3em;margin-bottom:1.2em}.prose li{margin-bottom:.4em}
-.prose pre{background:#14121f;color:#69db7c;padding:16px 18px;border-radius:14px;overflow-x:auto;font:.86rem/1.7 var(--mono);margin:1.4em 0;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--sh)}
-.tags{display:flex;gap:8px;flex-wrap:wrap}
-h3.sec{font-size:1.7rem;letter-spacing:-.03em;margin:34px 0 14px}
-form.box{display:grid;gap:12px;margin-bottom:18px}
-.cm{padding:14px 18px;border:3px solid var(--ink);border-radius:16px;background:var(--bg);margin-bottom:12px;box-shadow:4px 4px 0 var(--sh)}
-.cm small{font-family:var(--mono);opacity:.7;margin-left:8px}
-.back{display:inline-block;margin-bottom:20px}
-dialog{margin:auto;width:min(600px,94%);border:3px solid var(--ink);border-radius:24px;padding:26px;background:var(--paper);color:var(--ink);box-shadow:10px 10px 0 var(--sh)}
-dialog::backdrop{background:rgba(20,18,31,.6)}
-dialog h3{font-size:1.8rem;letter-spacing:-.04em;margin-bottom:14px}
-dialog .f{display:grid;gap:12px}dialog .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-dialog .acts{display:flex;justify-content:flex-end;gap:12px;margin-top:18px}
-footer{border-top:3px solid var(--ink);background:var(--ink);color:var(--bg);text-align:center;padding:22px 0;font:700 .85rem var(--mono)}
-#toast{position:fixed;bottom:22px;right:22px;background:var(--g);color:#14121f;border:3px solid var(--ink);border-radius:14px;padding:12px 18px;font-weight:700;box-shadow:5px 5px 0 var(--sh);transform:translateY(120px) rotate(3deg);transition:.3s;z-index:99}
-#toast.show{transform:none}
-.hide{display:none!important}
-@media(max-width:720px){.hero{grid-template-columns:1fr}.stick{transform:rotate(1deg)}.row{grid-template-columns:1fr;gap:6px}.arrow{display:none}.num{font-size:2.4rem}.nav input[type=search]{max-width:none;order:3;flex-basis:100%;margin:0}dialog .two{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scribble Lab — Ayush's loud little notebook</title>
+  <meta name="description"
+    content="Scribble Lab: Ayush's notebook about coding, study hacks, gadgets and everyday life.">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✏️</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <script>try { var t = JSON.parse(localStorage.getItem('sl-theme')); document.documentElement.dataset.theme = t || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light') } catch (e) { }</script>
+  <style>
+    :root {
+      --bg: #fff7e0;
+      --paper: #fff;
+      --ink: #14121f;
+      --y: #ffd43b;
+      --p: #ff6b9d;
+      --b: #4dabf7;
+      --g: #69db7c;
+      --sh: #14121f;
+      --sans: 'Space Grotesk', system-ui, sans-serif;
+      --mono: 'Space Mono', monospace
+    }
+
+    [data-theme=dark] {
+      --bg: #14121f;
+      --paper: #211e33;
+      --ink: #fff7e0;
+      --sh: #ffd43b
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0
+    }
+
+    body {
+      font-family: var(--sans);
+      color: var(--ink);
+      background: var(--bg);
+      background-image: radial-gradient(var(--ink) 1px, transparent 1px);
+      background-size: 26px 26px;
+      background-position: 0 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.55
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      opacity: .9;
+      z-index: -1
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      cursor: pointer
+    }
+
+    .wrap {
+      width: min(980px, 92%);
+      margin: auto
+    }
+
+    .ticker {
+      background: var(--ink);
+      color: var(--bg);
+      font: 700 .8rem var(--mono);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 7px 0
+    }
+
+    .ticker div {
+      display: inline-block;
+      animation: slide 28s linear infinite
+    }
+
+    @keyframes slide {
+      to {
+        transform: translateX(-50%)
+      }
+    }
+
+    header {
+      border-bottom: 3px solid var(--ink);
+      background: var(--y);
+      color: #14121f;
+      position: sticky;
+      top: 0;
+      z-index: 20
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      flex-wrap: wrap
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: -.04em;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .logo span {
+      background: #14121f;
+      color: var(--y);
+      padding: 0 8px;
+      border-radius: 8px;
+      transform: rotate(-4deg);
+      display: inline-block;
+      transition: .2s
+    }
+
+    .logo:hover span {
+      transform: rotate(4deg) scale(1.1)
+    }
+
+    .nav input[type=search] {
+      margin-left: auto;
+      flex: 1;
+      max-width: 260px
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 11px 14px;
+      border: 3px solid var(--ink);
+      border-radius: 12px;
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      outline: 0;
+      box-shadow: 3px 3px 0 var(--sh)
+    }
+
+    header input {
+      color: #14121f;
+      background: #fff;
+      border-color: #14121f;
+      box-shadow: 3px 3px 0 #14121f
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      box-shadow: 5px 5px 0 var(--p);
+      transform: translate(-2px, -2px)
+    }
+
+    .btn {
+      padding: 10px 18px;
+      border: 3px solid var(--ink);
+      border-radius: 12px;
+      background: var(--p);
+      color: #14121f;
+      font-weight: 700;
+      box-shadow: 4px 4px 0 var(--sh);
+      transition: .12s
+    }
+
+    header .btn {
+      border-color: #14121f;
+      box-shadow: 4px 4px 0 #14121f
+    }
+
+    .btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--sh)
+    }
+
+    .btn:active {
+      transform: translate(3px, 3px);
+      box-shadow: 0 0 0 var(--sh)
+    }
+
+    .btn.w {
+      background: var(--paper);
+      color: var(--ink)
+    }
+
+    .btn.b {
+      background: var(--b)
+    }
+
+    .btn.g {
+      background: var(--g)
+    }
+
+    .btn.on {
+      background: var(--g);
+      color: #14121f
+    }
+
+    main {
+      flex: 1;
+      padding: 36px 0 60px
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 28px;
+      align-items: center;
+      margin-bottom: 38px
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 8vw, 5.4rem);
+      line-height: .95;
+      letter-spacing: -.05em
+    }
+
+    .hero h1 mark {
+      background: var(--y);
+      color: #14121f;
+      padding: 0 .12em;
+      border: 3px solid var(--ink);
+      border-radius: 12px;
+      display: inline-block;
+      transform: rotate(-2deg);
+      box-shadow: 5px 5px 0 var(--sh)
+    }
+
+    .hero p {
+      margin-top: 18px;
+      font-size: 1.1rem;
+      max-width: 40ch
+    }
+
+    .stick {
+      background: var(--b);
+      color: #14121f;
+      border: 3px solid var(--ink);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 8px 8px 0 var(--sh);
+      transform: rotate(3deg);
+      font-family: var(--mono)
+    }
+
+    .stick b {
+      display: block;
+      font: 700 3rem var(--sans);
+      line-height: 1
+    }
+
+    .stick hr {
+      border: 0;
+      border-top: 3px dashed #14121f;
+      margin: 12px 0
+    }
+
+    .chips {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 26px
+    }
+
+    .chip {
+      padding: 7px 16px;
+      border: 3px solid var(--ink);
+      border-radius: 99px;
+      background: var(--paper);
+      font-weight: 700;
+      font-size: .88rem;
+      box-shadow: 3px 3px 0 var(--sh);
+      transition: .12s
+    }
+
+    .chip:hover {
+      transform: translate(-2px, -2px)
+    }
+
+    .chip.on {
+      background: var(--p);
+      color: #14121f
+    }
+
+    .list {
+      display: grid;
+      gap: 20px
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 20px 24px;
+      background: var(--paper);
+      border: 3px solid var(--ink);
+      border-radius: 20px;
+      box-shadow: 6px 6px 0 var(--sh);
+      transition: .15s;
+      animation: pop .5s both
+    }
+
+    .row:hover {
+      transform: translate(-4px, -4px) rotate(-.5deg);
+      box-shadow: 10px 10px 0 var(--sh)
+    }
+
+    .num {
+      font: 700 3.4rem var(--sans);
+      letter-spacing: -.06em;
+      line-height: 1;
+      color: var(--c, var(--p));
+      -webkit-text-stroke: 3px var(--ink);
+      paint-order: stroke fill
+    }
+
+    .row h2 {
+      font-size: 1.45rem;
+      letter-spacing: -.03em;
+      line-height: 1.15;
+      margin: 6px 0
+    }
+
+    .row p {
+      opacity: .78;
+      font-size: .95rem
+    }
+
+    .tag {
+      display: inline-block;
+      font: 700 .72rem var(--mono);
+      text-transform: uppercase;
+      padding: 2px 10px;
+      border: 2px solid var(--ink);
+      border-radius: 99px;
+      background: var(--c, var(--y));
+      color: #14121f
+    }
+
+    .arrow {
+      font: 700 2rem var(--sans);
+      width: 54px;
+      height: 54px;
+      border: 3px solid var(--ink);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--y);
+      color: #14121f;
+      transition: .2s
+    }
+
+    .row:hover .arrow {
+      transform: rotate(-45deg);
+      background: var(--g)
+    }
+
+    @keyframes pop {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(.97)
+      }
+    }
+
+    .empty {
+      padding: 40px;
+      text-align: center;
+      border: 3px dashed var(--ink);
+      border-radius: 20px;
+      font: 700 1.2rem var(--mono)
+    }
+
+    .art {
+      background: var(--paper);
+      border: 3px solid var(--ink);
+      border-radius: 24px;
+      box-shadow: 9px 9px 0 var(--sh);
+      padding: clamp(20px, 5vw, 48px);
+      animation: pop .4s both
+    }
+
+    .art h1 {
+      font-size: clamp(2rem, 5.5vw, 3.5rem);
+      line-height: 1;
+      letter-spacing: -.045em;
+      margin: 16px 0
+    }
+
+    .byline {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 14px 0;
+      border-block: 3px dashed var(--ink);
+      font-family: var(--mono);
+      font-size: .85rem
+    }
+
+    .byline .sp {
+      margin-left: auto;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap
+    }
+
+    .av {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 3px solid var(--ink);
+      background: var(--g);
+      color: #14121f;
+      display: grid;
+      place-items: center;
+      font-weight: 700
+    }
+
+    .prose {
+      margin: 28px 0;
+      font-size: 1.1rem
+    }
+
+    .prose p {
+      margin-bottom: 1.2em;
+      line-height: 1.8
+    }
+
+    .prose h2 {
+      font-size: 1.7rem;
+      letter-spacing: -.03em;
+      margin: 1.5em 0 .5em;
+      display: inline-block;
+      background: var(--y);
+      color: #14121f;
+      padding: 0 10px;
+      border: 3px solid var(--ink);
+      border-radius: 10px;
+      transform: rotate(-1deg)
+    }
+
+    .prose blockquote {
+      background: var(--p);
+      color: #14121f;
+      border: 3px solid var(--ink);
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin: 1.5em 0;
+      font-weight: 700;
+      font-size: 1.25rem;
+      box-shadow: 5px 5px 0 var(--sh)
+    }
+
+    .prose ul {
+      padding-left: 1.3em;
+      margin-bottom: 1.2em
+    }
+
+    .prose li {
+      margin-bottom: .4em
+    }
+
+    .prose pre {
+      background: #14121f;
+      color: #69db7c;
+      padding: 16px 18px;
+      border-radius: 14px;
+      overflow-x: auto;
+      font: .86rem/1.7 var(--mono);
+      margin: 1.4em 0;
+      border: 3px solid var(--ink);
+      box-shadow: 5px 5px 0 var(--sh)
+    }
+
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap
+    }
+
+    h3.sec {
+      font-size: 1.7rem;
+      letter-spacing: -.03em;
+      margin: 34px 0 14px
+    }
+
+    form.box {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 18px
+    }
+
+    .cm {
+      padding: 14px 18px;
+      border: 3px solid var(--ink);
+      border-radius: 16px;
+      background: var(--bg);
+      margin-bottom: 12px;
+      box-shadow: 4px 4px 0 var(--sh)
+    }
+
+    .cm small {
+      font-family: var(--mono);
+      opacity: .7;
+      margin-left: 8px
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 20px
+    }
+
+    dialog {
+      margin: auto;
+      width: min(600px, 94%);
+      border: 3px solid var(--ink);
+      border-radius: 24px;
+      padding: 26px;
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: 10px 10px 0 var(--sh)
+    }
+
+    dialog::backdrop {
+      background: rgba(20, 18, 31, .6)
+    }
+
+    dialog h3 {
+      font-size: 1.8rem;
+      letter-spacing: -.04em;
+      margin-bottom: 14px
+    }
+
+    dialog .f {
+      display: grid;
+      gap: 12px
+    }
+
+    dialog .two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px
+    }
+
+    dialog .acts {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 18px
+    }
+
+    footer {
+      border-top: 3px solid var(--ink);
+      background: var(--ink);
+      color: var(--bg);
+      text-align: center;
+      padding: 22px 0;
+      font: 700 .85rem var(--mono)
+    }
+
+    #toast {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      background: var(--g);
+      color: #14121f;
+      border: 3px solid var(--ink);
+      border-radius: 14px;
+      padding: 12px 18px;
+      font-weight: 700;
+      box-shadow: 5px 5px 0 var(--sh);
+      transform: translateY(120px) rotate(3deg);
+      transition: .3s;
+      z-index: 99
+    }
+
+    #toast.show {
+      transform: none
+    }
+
+    .hide {
+      display: none !important
+    }
+
+    @media(max-width:720px) {
+      .hero {
+        grid-template-columns: 1fr
+      }
+
+      .stick {
+        transform: rotate(1deg)
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+        gap: 6px
+      }
+
+      .arrow {
+        display: none
+      }
+
+      .num {
+        font-size: 2.4rem
+      }
+
+      .nav input[type=search] {
+        max-width: none;
+        order: 3;
+        flex-basis: 100%;
+        margin: 0
+      }
+
+      dialog .two {
+        grid-template-columns: 1fr
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      * {
+        animation: none !important;
+        transition: none !important
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="ticker"><div id="tick"></div></div>
-<header>
-  <div class="wrap nav">
-    <a href="#/" class="logo"><span>Scribble</span>Lab ✏️</a>
-    <input id="q" type="search" placeholder="Search the notebook…" aria-label="Search posts">
-    <button class="btn" id="newBtn">+ New Post</button>
-    <button class="btn w" id="themeBtn" aria-label="Toggle theme">🌙</button>
+  <div class="ticker">
+    <div id="tick"></div>
   </div>
-</header>
-
-<main class="wrap">
-  <section id="home">
-    <div class="hero">
-      <div>
-        <h1>Loud ideas,<br><mark>scribbled</mark> down.</h1>
-        <p>Hi, I'm Ayush. This is my notebook for coding experiments, study hacks, gadgets and random life lessons.</p>
-      </div>
-      <div class="stick" id="stick"></div>
+  <header>
+    <div class="wrap nav">
+      <a href="#/" class="logo"><span>Scribble</span>Lab ✏️</a>
+      <input id="q" type="search" placeholder="Search the notebook…" aria-label="Search posts">
+      <button class="btn" id="newBtn">+ New Post</button>
+      <button class="btn w" id="themeBtn" aria-label="Toggle theme">🌙</button>
     </div>
-    <div class="chips" id="chips"></div>
-    <div class="list" id="list"></div>
-    <div class="empty hide" id="empty">Nothing found. Try another word! 🕵️</div>
-  </section>
-  <article id="post" class="hide"></article>
-</main>
+  </header>
 
-<footer>© <span id="yr"></span> SCRIBBLE LAB · MADE BY AYUSH · NO FANCY FRAMEWORKS, JUST HTML ✌️</footer>
-
-<dialog id="dlg">
-  <form id="newForm">
-    <h3>Scribble a new post ✏️</h3>
-    <div class="f">
-      <input id="nTitle" placeholder="Title *" required maxlength="90">
-      <div class="two">
-        <select id="nCat"><option>Coding</option><option>Study</option><option>Gadgets</option><option>Life</option></select>
-        <input id="nAuth" placeholder="Your name *" value="Ayush" required maxlength="40">
+  <main class="wrap">
+    <section id="home">
+      <div class="hero">
+        <div>
+          <h1>Loud ideas,<br><mark>scribbled</mark> down.</h1>
+          <p>Hi, I'm Ayush. This is my notebook for coding experiments, study hacks, gadgets and random life lessons.
+          </p>
+        </div>
+        <div class="stick" id="stick"></div>
       </div>
-      <input id="nEx" placeholder="One-line teaser *" required maxlength="160">
-      <textarea id="nBody" rows="7" placeholder="Write here. Blank line = new paragraph. Start a line with ## for a heading." required></textarea>
-    </div>
-    <div class="acts"><button type="button" class="btn w" id="cancel">Cancel</button><button class="btn g">Publish!</button></div>
-  </form>
-</dialog>
-<div id="toast" role="status"></div>
+      <div class="chips" id="chips"></div>
+      <div class="list" id="list"></div>
+      <div class="empty hide" id="empty">Nothing found. Try another word! 🕵️</div>
+    </section>
+    <article id="post" class="hide"></article>
+  </main>
 
-<script>
-const $ = s => document.querySelector(s);
-const store = {
-  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d }catch(e){ return d } },
-  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)) }catch(e){} }
-};
-const COLORS = { Coding:'var(--b)', Study:'var(--g)', Gadgets:'var(--p)', Life:'var(--y)' };
+  <footer>© <span id="yr"></span> SCRIBBLE LAB · MADE BY AYUSH · NO FANCY FRAMEWORKS, JUST HTML ✌️</footer>
 
-const SEED = [
-  { id:'why-i-started', title:'Why I Started This Blog (And Why You Should Too)', category:'Life', author:'Ayush', date:'Oct 02, 2026', tags:['Intro','Writing'],
-    excerpt:'Writing things down made me understand them better. Here is how a messy notebook became a website.',
-    content:`<p>I never thought I would write online. I was the kid who hated essays. But then I noticed something strange: whenever I explained a topic to a friend, I finally understood it myself.</p><h2>Writing is thinking</h2><p>A blog is just a notebook with a front door. You do not need to be an expert. You only need to be one step ahead of someone else, or one step ahead of yourself from last week.</p><blockquote>If you can explain it simply, you actually learned it.</blockquote><p>So this is my space: unfinished thoughts, small wins and honest mistakes. Welcome in!</p>` },
-  { id:'code-without-burnout', title:'Learning to Code Without Burning Out', category:'Coding', author:'Ayush', date:'Sep 26, 2026', tags:['Beginners','Habits'],
-    excerpt:'Tutorial hell is real. This is the slow, steady routine that finally made coding feel fun.',
-    content:`<p>My first month of coding, I watched twelve hours of tutorials and built nothing. I felt busy, but I was not learning.</p><h2>The 70/30 rule</h2><p>Now I spend 30% of my time watching or reading and 70% building tiny things. A button that changes color counts. A to-do list counts. Ugly counts.</p><ul><li>Code every day, even for 20 minutes.</li><li>Build before you feel ready.</li><li>Take real breaks, with no phone.</li></ul><pre><code>// my very first "project"
+  <dialog id="dlg">
+    <form id="newForm">
+      <h3>Scribble a new post ✏️</h3>
+      <div class="f">
+        <input id="nTitle" placeholder="Title *" required maxlength="90">
+        <div class="two">
+          <select id="nCat">
+            <option>Coding</option>
+            <option>Study</option>
+            <option>Gadgets</option>
+            <option>Life</option>
+          </select>
+          <input id="nAuth" placeholder="Your name *" value="Ayush" required maxlength="40">
+        </div>
+        <input id="nEx" placeholder="One-line teaser *" required maxlength="160">
+        <textarea id="nBody" rows="7"
+          placeholder="Write here. Blank line = new paragraph. Start a line with ## for a heading." required></textarea>
+      </div>
+      <div class="acts"><button type="button" class="btn w" id="cancel">Cancel</button><button
+          class="btn g">Publish!</button></div>
+    </form>
+  </dialog>
+  <div id="toast" role="status"></div>
+
+  <script>
+    const $ = s => document.querySelector(s);
+    const store = {
+      get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d } catch (e) { return d } },
+      set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)) } catch (e) { } }
+    };
+    const COLORS = { Coding: 'var(--b)', Study: 'var(--g)', Gadgets: 'var(--p)', Life: 'var(--y)' };
+
+    const SEED = [
+      {
+        id: 'why-i-started', title: 'Why I Started This Blog (And Why You Should Too)', category: 'Life', author: 'Ayush', date: 'Oct 02, 2026', tags: ['Intro', 'Writing'],
+        excerpt: 'Writing things down made me understand them better. Here is how a messy notebook became a website.',
+        content: `<p>I never thought I would write online. I was the kid who hated essays. But then I noticed something strange: whenever I explained a topic to a friend, I finally understood it myself.</p><h2>Writing is thinking</h2><p>A blog is just a notebook with a front door. You do not need to be an expert. You only need to be one step ahead of someone else, or one step ahead of yourself from last week.</p><blockquote>If you can explain it simply, you actually learned it.</blockquote><p>So this is my space: unfinished thoughts, small wins and honest mistakes. Welcome in!</p>`
+      },
+      {
+        id: 'code-without-burnout', title: 'Learning to Code Without Burning Out', category: 'Coding', author: 'Ayush', date: 'Sep 26, 2026', tags: ['Beginners', 'Habits'],
+        excerpt: 'Tutorial hell is real. This is the slow, steady routine that finally made coding feel fun.',
+        content: `<p>My first month of coding, I watched twelve hours of tutorials and built nothing. I felt busy, but I was not learning.</p><h2>The 70/30 rule</h2><p>Now I spend 30% of my time watching or reading and 70% building tiny things. A button that changes color counts. A to-do list counts. Ugly counts.</p><ul><li>Code every day, even for 20 minutes.</li><li>Build before you feel ready.</li><li>Take real breaks, with no phone.</li></ul><pre><code>// my very first "project"
 document.querySelector('button')
   .addEventListener('click', () => {
     document.body.style.background = 'hotpink';
   });</code></pre><p>Small and consistent beats huge and exhausting every single time.</p>` },
-  { id:'seven-day-exams', title:'How I Prepare for Exams in 7 Days', category:'Study', author:'Ayush', date:'Sep 18, 2026', tags:['Exams','Planning'],
-    excerpt:'No miracle tricks. Just a simple 7-day plan that keeps me calm and organized before exams.',
-    content:`<p>Every exam season I used to panic. Now I follow a simple plan, and the panic is mostly gone.</p><h2>The plan</h2><ul><li>Day 1: List every topic. Mark them easy, medium or hard.</li><li>Days 2-4: Hard topics first, in short 40-minute sessions.</li><li>Day 5: Practice with old papers under a timer.</li><li>Day 6: Revise only your own notes.</li><li>Day 7: Light revision, then sleep early.</li></ul><blockquote>Sleep is a study tool. Treat it like one.</blockquote><p>Stop comparing your schedule with others. The best plan is the one you will actually follow.</p>` },
-  { id:'student-budget-desk', title:'My Desk Setup on a Student Budget', category:'Gadgets', author:'Ayush', date:'Sep 10, 2026', tags:['Setup','Budget'],
-    excerpt:'You do not need an expensive setup. A few smart choices made my small desk feel like a studio.',
-    content:`<p>My desk is small, but I love it. Over time I learned that comfort beats flash.</p><h2>What actually matters</h2><ul><li>A good chair or a firm cushion for your back.</li><li>A warm desk lamp so your eyes stay relaxed.</li><li>A laptop stand to lift the screen to eye level.</li><li>One plant. It somehow makes everything better.</li></ul><p>I bought most of these second-hand or on sale. Spend on the things you touch the most, and save on everything else.</p>` },
-  { id:'free-student-tools', title:'5 Free Tools Every Student Developer Should Know', category:'Coding', author:'Ayush', date:'Sep 03, 2026', tags:['Tools','Free'],
-    excerpt:'Great software does not have to cost money. These five free tools carry my whole workflow.',
-    content:`<p>When you are a student, free is a beautiful word. These tools earned a permanent place in my setup.</p><h2>The lineup</h2><ul><li>VS Code for writing code.</li><li>GitHub for saving and sharing projects.</li><li>GitHub Pages for hosting a site, like this one.</li><li>Figma for quick design sketches.</li><li>Notion or plain notes for planning.</li></ul><p>Pick two, learn them properly, and ignore the endless "top 50 tools" lists.</p>` },
-  { id:'cricket-chai-debugging', title:'Cricket, Chai and Debugging: Lessons from Boring Evenings', category:'Life', author:'Ayush', date:'Aug 25, 2026', tags:['Fun','Reflection'],
-    excerpt:'Strange but true: my best bug fixes happened away from the screen, with a cup of chai in my hand.',
-    content:`<p>I once spent three hours stuck on one bug. Then I went out, played some cricket with friends, came back with chai, and fixed it in four minutes.</p><h2>Step away to see clearly</h2><p>Your brain keeps working in the background. A walk, a game or a warm drink gives it room to connect the dots.</p><blockquote>Stuck? Stand up. The answer is often waiting outside the screen.</blockquote><p>Now I schedule breaks on purpose. They are not wasted time. They are part of the work.</p>` }
-];
+      {
+        id: 'seven-day-exams', title: 'How I Prepare for Exams in 7 Days', category: 'Study', author: 'Ayush', date: 'Sep 18, 2026', tags: ['Exams', 'Planning'],
+        excerpt: 'No miracle tricks. Just a simple 7-day plan that keeps me calm and organized before exams.',
+        content: `<p>Every exam season I used to panic. Now I follow a simple plan, and the panic is mostly gone.</p><h2>The plan</h2><ul><li>Day 1: List every topic. Mark them easy, medium or hard.</li><li>Days 2-4: Hard topics first, in short 40-minute sessions.</li><li>Day 5: Practice with old papers under a timer.</li><li>Day 6: Revise only your own notes.</li><li>Day 7: Light revision, then sleep early.</li></ul><blockquote>Sleep is a study tool. Treat it like one.</blockquote><p>Stop comparing your schedule with others. The best plan is the one you will actually follow.</p>`
+      },
+      {
+        id: 'student-budget-desk', title: 'My Desk Setup on a Student Budget', category: 'Gadgets', author: 'Ayush', date: 'Sep 10, 2026', tags: ['Setup', 'Budget'],
+        excerpt: 'You do not need an expensive setup. A few smart choices made my small desk feel like a studio.',
+        content: `<p>My desk is small, but I love it. Over time I learned that comfort beats flash.</p><h2>What actually matters</h2><ul><li>A good chair or a firm cushion for your back.</li><li>A warm desk lamp so your eyes stay relaxed.</li><li>A laptop stand to lift the screen to eye level.</li><li>One plant. It somehow makes everything better.</li></ul><p>I bought most of these second-hand or on sale. Spend on the things you touch the most, and save on everything else.</p>`
+      },
+      {
+        id: 'free-student-tools', title: '5 Free Tools Every Student Developer Should Know', category: 'Coding', author: 'Ayush', date: 'Sep 03, 2026', tags: ['Tools', 'Free'],
+        excerpt: 'Great software does not have to cost money. These five free tools carry my whole workflow.',
+        content: `<p>When you are a student, free is a beautiful word. These tools earned a permanent place in my setup.</p><h2>The lineup</h2><ul><li>VS Code for writing code.</li><li>GitHub for saving and sharing projects.</li><li>GitHub Pages for hosting a site, like this one.</li><li>Figma for quick design sketches.</li><li>Notion or plain notes for planning.</li></ul><p>Pick two, learn them properly, and ignore the endless "top 50 tools" lists.</p>`
+      },
+      {
+        id: 'cricket-chai-debugging', title: 'Cricket, Chai and Debugging: Lessons from Boring Evenings', category: 'Life', author: 'Ayush', date: 'Aug 25, 2026', tags: ['Fun', 'Reflection'],
+        excerpt: 'Strange but true: my best bug fixes happened away from the screen, with a cup of chai in my hand.',
+        content: `<p>I once spent three hours stuck on one bug. Then I went out, played some cricket with friends, came back with chai, and fixed it in four minutes.</p><h2>Step away to see clearly</h2><p>Your brain keeps working in the background. A walk, a game or a warm drink gives it room to connect the dots.</p><blockquote>Stuck? Stand up. The answer is often waiting outside the screen.</blockquote><p>Now I schedule breaks on purpose. They are not wasted time. They are part of the work.</p>`
+      }
+    ];
 
-let posts = [...store.get('sl-user-posts', []), ...SEED];
-let cat = 'All', query = '';
+    let posts = [...store.get('sl-user-posts', []), ...SEED];
+    let cat = 'All', query = '';
 
-const esc = s => { const d = document.createElement('div'); d.textContent = s ?? ''; return d.innerHTML };
-const mins = h => Math.max(1, Math.ceil(h.replace(/<[^>]*>/g,' ').split(/\s+/).length / 190));
-const col = p => COLORS[p.category] || 'var(--p)';
-function toast(m){ const t = $('#toast'); t.textContent = m; t.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(()=>t.classList.remove('show'), 2400) }
+    const esc = s => { const d = document.createElement('div'); d.textContent = s ?? ''; return d.innerHTML };
+    const mins = h => Math.max(1, Math.ceil(h.replace(/<[^>]*>/g, ' ').split(/\s+/).length / 190));
+    const col = p => COLORS[p.category] || 'var(--p)';
+    function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('show'), 2400) }
 
-function renderHome(){
-  const cats = ['All', ...new Set(posts.map(p => p.category))];
-  $('#chips').innerHTML = cats.map(c => `<button class="chip ${c===cat?'on':''}" data-cat="${esc(c)}">${esc(c)}</button>`).join('');
-  $('#stick').innerHTML = `<b>${posts.length}</b>posts scribbled<hr><b>${posts.reduce((n,p)=>n+mins(p.content),0)}</b>minutes of reading<hr>🔥 fresh weekly`;
-  const q = query.toLowerCase();
-  const list = posts.filter(p => (cat==='All' || p.category===cat) && (!q || [p.title,p.excerpt,...(p.tags||[])].join(' ').toLowerCase().includes(q)));
-  $('#empty').classList.toggle('hide', list.length > 0);
-  $('#list').innerHTML = list.map((p,i) => `
-    <a class="row" href="#/post/${p.id}" style="--c:${col(p)};animation-delay:${i*60}ms">
-      <div class="num">${String(i+1).padStart(2,'0')}</div>
+    function renderHome() {
+      const cats = ['All', ...new Set(posts.map(p => p.category))];
+      $('#chips').innerHTML = cats.map(c => `<button class="chip ${c === cat ? 'on' : ''}" data-cat="${esc(c)}">${esc(c)}</button>`).join('');
+      $('#stick').innerHTML = `<b>${posts.length}</b>posts scribbled<hr><b>${posts.reduce((n, p) => n + mins(p.content), 0)}</b>minutes of reading<hr>🔥 fresh weekly`;
+      const q = query.toLowerCase();
+      const list = posts.filter(p => (cat === 'All' || p.category === cat) && (!q || [p.title, p.excerpt, ...(p.tags || [])].join(' ').toLowerCase().includes(q)));
+      $('#empty').classList.toggle('hide', list.length > 0);
+      $('#list').innerHTML = list.map((p, i) => `
+    <a class="row" href="#/post/${p.id}" style="--c:${col(p)};animation-delay:${i * 60}ms">
+      <div class="num">${String(i + 1).padStart(2, '0')}</div>
       <div><span class="tag">${esc(p.category)}</span> <small style="font-family:var(--mono)">${mins(p.content)} min · ${esc(p.date)}</small><h2>${esc(p.title)}</h2><p>${esc(p.excerpt)}</p></div>
       <div class="arrow">→</div>
     </a>`).join('');
-}
+    }
 
-function renderPost(id){
-  const p = posts.find(x => x.id === id);
-  if (!p) { location.hash = '#/'; return }
-  const liked = !!store.get('sl-likes', {})[id];
-  const cms = store.get('sl-cm-' + id, []);
-  $('#post').innerHTML = `
+    function renderPost(id) {
+      const p = posts.find(x => x.id === id);
+      if (!p) { location.hash = '#/'; return }
+      const liked = !!store.get('sl-likes', {})[id];
+      const cms = store.get('sl-cm-' + id, []);
+      $('#post').innerHTML = `
     <a href="#/" class="btn w back">← Back</a>
     <div class="art" style="--c:${col(p)}">
       <span class="tag">${esc(p.category)}</span>
       <h1>${esc(p.title)}</h1>
       <div class="byline">
-        <span class="av">${esc((p.author||'A')[0].toUpperCase())}</span>
+        <span class="av">${esc((p.author || 'A')[0].toUpperCase())}</span>
         <span>${esc(p.author)} · ${esc(p.date)} · ${mins(p.content)} min</span>
         <span class="sp">
-          <button class="btn ${liked?'on':'b'}" id="likeBtn">${liked?'💚 Liked':'🤍 Like'}</button>
+          <button class="btn ${liked ? 'on' : 'b'}" id="likeBtn">${liked ? '💚 Liked' : '🤍 Like'}</button>
           <button class="btn g" id="shareBtn">🔗 Share</button>
           ${p.user ? '<button class="btn" id="delBtn">🗑 Delete</button>' : ''}
         </span>
       </div>
       <div class="prose">${p.content}</div>
-      <div class="tags">${(p.tags||[]).map(t=>`<span class="tag">#${esc(t)}</span>`).join('')}</div>
+      <div class="tags">${(p.tags || []).map(t => `<span class="tag">#${esc(t)}</span>`).join('')}</div>
       <h3 class="sec">Comments (${cms.length})</h3>
       <form class="box" id="cmForm">
         <input id="cmName" placeholder="Your name" required maxlength="40">
         <textarea id="cmText" rows="3" placeholder="Say something nice (or useful)…" required maxlength="600"></textarea>
         <button class="btn g" style="justify-self:start">Post comment</button>
       </form>
-      ${cms.length ? cms.map(c=>`<div class="cm"><strong>${esc(c.name)}</strong><small>${esc(c.date)}</small><p>${esc(c.text)}</p></div>`).join('') : '<p style="font-family:var(--mono)">No comments yet. Be the first! 👇</p>'}
+      ${cms.length ? cms.map(c => `<div class="cm"><strong>${esc(c.name)}</strong><small>${esc(c.date)}</small><p>${esc(c.text)}</p></div>`).join('') : '<p style="font-family:var(--mono)">No comments yet. Be the first! 👇</p>'}
     </div>`;
-  $('#likeBtn').onclick = () => { const l = store.get('sl-likes', {}); l[id] ? delete l[id] : l[id] = 1; store.set('sl-likes', l); renderPost(id) };
-  $('#shareBtn').onclick = async () => { try{ await navigator.clipboard.writeText(location.href); toast('Link copied! 🔗') }catch(e){ toast('Copy the address bar to share') } };
-  if ($('#delBtn')) $('#delBtn').onclick = () => {
-    if (!confirm('Delete this post?')) return;
-    posts = posts.filter(x => x.id !== id); store.set('sl-user-posts', posts.filter(x => x.user)); toast('Deleted'); location.hash = '#/';
-  };
-  $('#cmForm').onsubmit = e => {
-    e.preventDefault();
-    const l = store.get('sl-cm-' + id, []);
-    l.unshift({ name:$('#cmName').value.trim(), text:$('#cmText').value.trim(), date:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) });
-    store.set('sl-cm-' + id, l); renderPost(id); toast('Comment posted! 🎉');
-  };
-}
+      $('#likeBtn').onclick = () => { const l = store.get('sl-likes', {}); l[id] ? delete l[id] : l[id] = 1; store.set('sl-likes', l); renderPost(id) };
+      $('#shareBtn').onclick = async () => { try { await navigator.clipboard.writeText(location.href); toast('Link copied! 🔗') } catch (e) { toast('Copy the address bar to share') } };
+      if ($('#delBtn')) $('#delBtn').onclick = () => {
+        if (!confirm('Delete this post?')) return;
+        posts = posts.filter(x => x.id !== id); store.set('sl-user-posts', posts.filter(x => x.user)); toast('Deleted'); location.hash = '#/';
+      };
+      $('#cmForm').onsubmit = e => {
+        e.preventDefault();
+        const l = store.get('sl-cm-' + id, []);
+        l.unshift({ name: $('#cmName').value.trim(), text: $('#cmText').value.trim(), date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) });
+        store.set('sl-cm-' + id, l); renderPost(id); toast('Comment posted! 🎉');
+      };
+    }
 
-function route(){
-  const m = location.hash.match(/^#\/post\/(.+)$/);
-  $('#home').classList.toggle('hide', !!m);
-  $('#post').classList.toggle('hide', !m);
-  if (m) { const id = decodeURIComponent(m[1]); renderPost(id); document.title = (posts.find(p=>p.id===id)?.title || 'Post') + ' — Scribble Lab' }
-  else { renderHome(); document.title = "Scribble Lab — Ayush's loud little notebook" }
-  window.scrollTo(0, 0);
-}
-addEventListener('hashchange', route);
+    function route() {
+      const m = location.hash.match(/^#\/post\/(.+)$/);
+      $('#home').classList.toggle('hide', !!m);
+      $('#post').classList.toggle('hide', !m);
+      if (m) { const id = decodeURIComponent(m[1]); renderPost(id); document.title = (posts.find(p => p.id === id)?.title || 'Post') + ' — Scribble Lab' }
+      else { renderHome(); document.title = "Scribble Lab — Ayush's loud little notebook" }
+      window.scrollTo(0, 0);
+    }
+    addEventListener('hashchange', route);
 
-$('#chips').addEventListener('click', e => { const b = e.target.closest('[data-cat]'); if (b){ cat = b.dataset.cat; renderHome() } });
-$('#q').addEventListener('input', e => { query = e.target.value.trim(); if (location.hash.startsWith('#/post')) location.hash = '#/'; else renderHome() });
+    $('#chips').addEventListener('click', e => { const b = e.target.closest('[data-cat]'); if (b) { cat = b.dataset.cat; renderHome() } });
+    $('#q').addEventListener('input', e => { query = e.target.value.trim(); if (location.hash.startsWith('#/post')) location.hash = '#/'; else renderHome() });
 
-const setTheme = t => { document.documentElement.dataset.theme = t; $('#themeBtn').textContent = t === 'dark' ? '☀️' : '🌙'; store.set('sl-theme', t) };
-$('#themeBtn').onclick = () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
-setTheme(document.documentElement.dataset.theme);
+    const setTheme = t => { document.documentElement.dataset.theme = t; $('#themeBtn').textContent = t === 'dark' ? '☀️' : '🌙'; store.set('sl-theme', t) };
+    $('#themeBtn').onclick = () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+    setTheme(document.documentElement.dataset.theme);
 
-$('#newBtn').onclick = () => $('#dlg').showModal();
-$('#cancel').onclick = () => $('#dlg').close();
-$('#newForm').onsubmit = e => {
-  e.preventDefault();
-  const title = $('#nTitle').value.trim();
-  const html = $('#nBody').value.trim().split(/\n\s*\n/).map(b => b.startsWith('## ') ? `<h2>${esc(b.slice(3))}</h2>` : `<p>${esc(b).replace(/\n/g,'<br>')}</p>`).join('');
-  const post = { id: title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') + '-' + Date.now().toString().slice(-4),
-    title, category:$('#nCat').value, author:$('#nAuth').value.trim(), excerpt:$('#nEx').value.trim(), content:html,
-    tags:[$('#nCat').value,'Community'], user:true, date:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) };
-  posts.unshift(post); store.set('sl-user-posts', posts.filter(x => x.user));
-  e.target.reset(); $('#nAuth').value = 'Ayush'; $('#dlg').close(); toast('Published! 🚀'); location.hash = '#/post/' + post.id;
-};
+    $('#newBtn').onclick = () => $('#dlg').showModal();
+    $('#cancel').onclick = () => $('#dlg').close();
+    $('#newForm').onsubmit = e => {
+      e.preventDefault();
+      const title = $('#nTitle').value.trim();
+      const html = $('#nBody').value.trim().split(/\n\s*\n/).map(b => b.startsWith('## ') ? `<h2>${esc(b.slice(3))}</h2>` : `<p>${esc(b).replace(/\n/g, '<br>')}</p>`).join('');
+      const post = {
+        id: title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '-' + Date.now().toString().slice(-4),
+        title, category: $('#nCat').value, author: $('#nAuth').value.trim(), excerpt: $('#nEx').value.trim(), content: html,
+        tags: [$('#nCat').value, 'Community'], user: true, date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+      };
+      posts.unshift(post); store.set('sl-user-posts', posts.filter(x => x.user));
+      e.target.reset(); $('#nAuth').value = 'Ayush'; $('#dlg').close(); toast('Published! 🚀'); location.hash = '#/post/' + post.id;
+    };
 
-const T = '✦ CODING ✦ STUDY HACKS ✦ GADGETS ✦ LIFE LESSONS ✦ FRESH POSTS WEEKLY ';
-$('#tick').textContent = T.repeat(8);
-$('#yr').textContent = new Date().getFullYear();
-route();
-</script>
+    const T = '✦ CODING ✦ STUDY HACKS ✦ GADGETS ✦ LIFE LESSONS ✦ FRESH POSTS WEEKLY ';
+    $('#tick').textContent = T.repeat(8);
+    $('#yr').textContent = new Date().getFullYear();
+    route();
+  </script>
 </body>
+
 </html>
